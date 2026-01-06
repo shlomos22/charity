@@ -1,6 +1,6 @@
 {
-  "name": "לוח משמרות",
-  "short_name": "משמרות",
+  "name": "קופת צדקה דיגיטלית",
+  "short_name": "קופת צדקה דיגיטלית",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#f0f2f5",
