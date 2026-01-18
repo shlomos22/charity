@@ -350,7 +350,7 @@
 
         initWheel();
 		
-		function payWithBit(amount) {
+		async function payWithBit(amount) {
 			if (!amount || amount <= 0) return;
 
 			const textToCopy = amount.toFixed(2);
