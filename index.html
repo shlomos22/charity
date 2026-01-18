@@ -365,7 +365,10 @@
 			}
 
 			// לפתוח את ביט (לא עם סכום, רק פתיחה)
-			window.location.href = "https://bitpay.co.il/";
+			const note = `צדקה בסך ₪${amount.toFixed(2)}`;
+			const bitUrl = `https://bitpay.co.il/app/pay?amount=${encodeURIComponent(amount.toFixed(2))}&comment=${encodeURIComponent(note)}`;
+
+			window.open(bitUrl, "_blank");
 		}
     </script>
 </body>
