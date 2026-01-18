@@ -305,6 +305,7 @@
 
         function resetFull() {
             if (confirm("האם לרוקן את כל הקופה?")) {
+				const amountToPay = total; // ✅ שומר את הסכום לפני האיפוס
                 total = 0;
                 save();
                 document.getElementById('total-display').innerText = `₪0.00`;
@@ -350,18 +351,21 @@
         initWheel();
 		
 		function payWithBit(amount) {
-			// הגנה
 			if (!amount || amount <= 0) return;
 
-			// כאן אפשר לשנות מה שרוצים
-			const note = `צדקה בסך ₪${amount.toFixed(2)}`;
+			const textToCopy = amount.toFixed(2);
 
-			// Bit עובד הכי טוב דרך deeplink (על מובייל)
-			// אם יש לך מספר/יעד קבוע - תוכל להכניס אותו כאן
-			// יש גרסאות שונות ללינקים של Bit, אז זה פורמט נפוץ:
-			const bitUrl = `https://bitpay.co.il/app/pay?amount=${encodeURIComponent(amount.toFixed(2))}&comment=${encodeURIComponent(note)}`;
+			// ניסיון להעתיק ללוח (דורש HTTPS או localhost, ובדרך כלל חייב להיות בתוך click)
+			try {
+				await navigator.clipboard.writeText(textToCopy);
+				alert(`הסכום ₪${textToCopy} הועתק. הדבק בביט.`);
+			} catch (e) {
+				// fallback אם clipboard נחסם
+				prompt("העתק את הסכום לביט:", textToCopy);
+			}
 
-			window.open(bitUrl, "_blank");
+			// לפתוח את ביט (לא עם סכום, רק פתיחה)
+			window.location.href = "https://bitpay.co.il/";
 		}
     </script>
 </body>
